@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Spawner.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Enemy(Air).tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/port_base.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/HoverCraft.tscn" type="PackedScene" id=4]
+
+[node name="Spawner" type="Node2D"]
+script = ExtResource( 1 )
+SpawnItem = ExtResource( 2 )
+Infinate = true
+
+[node name="HoverCraft" parent="." instance=ExtResource( 4 )]
+position = Vector2( -36.0203, -43.0871 )
+
+[node name="HoverCraft2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 35.9797, -43.0871 )
+
+[node name="HoverCraft3" parent="." instance=ExtResource( 4 )]
+position = Vector2( -36.034, 41.3583 )
+
+[node name="HoverCraft4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 35.966, 41.5811 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )

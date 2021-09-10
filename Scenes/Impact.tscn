@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sprites/smoke_particle.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Impact.gd" type="Script" id=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5125 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 5.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.05
+scale_curve = SubResource( 2 )
+
+[node name="Impact" type="Particles2D"]
+position = Vector2( -121.68, -88.5026 )
+emitting = false
+one_shot = true
+speed_scale = 7.0
+explosiveness = 0.8
+randomness = 0.43
+process_material = SubResource( 3 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )

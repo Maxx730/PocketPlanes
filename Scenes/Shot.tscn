@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Shot.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/single_shot.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Impact.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 3.03907, 7.9995 )
+
+[node name="Shot" type="RigidBody2D" groups=[
+"Shot",
+]]
+collision_layer = 2
+collision_mask = 2
+mass = 0.0510204
+gravity_scale = 0.0
+contacts_reported = 1
+contact_monitor = true
+can_sleep = false
+script = ExtResource( 1 )
+FireRate = 0.05
+FireSpeed = 500.0
+ImpactScene = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 1.5708
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 2 )
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+scale = Vector2( 0.3, 0.3 )
+shape = SubResource( 1 )
+
+[node name="Visible" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -0.0371623, 0.0743256 )
+scale = Vector2( 0.476006, 0.18242 )
+
+[connection signal="body_entered" from="." to="." method="ShotCollided"]
+[connection signal="screen_exited" from="Visible" to="." method="OnShotExited"]
