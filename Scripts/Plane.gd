@@ -5,13 +5,16 @@ onready var ViewportSize = get_viewport().size
 export(int) var EntranceSpeed = 1
 export(int) var BottomOffset = 50
 export(int) var ShadowDistance = 20
-export(int) var Speed = 200
+export(int) var MaxSpeed = 200
+export(int) var MinSpeed = 50
 export(int) var TurnSpeed = 1
+export(int) var Acceleration = 5
 
 var Cam = null
 var FinishedSpawn = false
 var SkipIntro = false
 var ShowDebug = false
+var Speed = 100
 		
 func _draw():
 	if ShowDebug:
@@ -56,3 +59,12 @@ func PositionShadow():
 
 func DrawTrail():
 	pass
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			if event.button_index == BUTTON_WHEEL_UP:
+				Speed = clamp(Speed + Acceleration, MinSpeed, MaxSpeed)
+			
+			if event.button_index == BUTTON_WHEEL_DOWN:
+				Speed = clamp(Speed - Acceleration, MinSpeed, MaxSpeed)

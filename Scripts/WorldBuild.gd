@@ -19,6 +19,7 @@ var Spawned = false
 var Cam = null
 var DebugLabel = null
 var Speedometer = null
+var Spawn = null
 
 func _ready():
 	if CameraPath != null:
@@ -40,7 +41,7 @@ func _process(delta):
 	
 func SpawnPlayer(point):
 	if PlayerPlane != null:
-		var Spawn = PlayerPlane.instance()
+		Spawn = PlayerPlane.instance()
 		Spawn.position = to_local(point)
 		Spawn.Cam = Cam
 		Spawn.SkipIntro = SkipIntro
@@ -52,5 +53,5 @@ func DetermineStartPoint():
 	return Vector2(0, 0) if SkipIntro else Vector2(ViewportSize.x / 4, ViewportSize.y)
 
 func UpdateUI():
-	if Speedometer != null:
-		Speedometer.text = "working"
+	if Speedometer != null && Spawn != null:
+		Speedometer.text = String(Spawn.Speed) + "MPH"

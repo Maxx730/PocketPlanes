@@ -102,9 +102,9 @@ color_ramp = SubResource( 17 )
 [node name="Plane" type="KinematicBody2D" groups=[
 "Plane",
 ]]
+z_index = 1
 collision_mask = 2
 script = ExtResource( 3 )
-Speed = 100
 TurnSpeed = 3
 
 [node name="Shadow" type="Sprite" parent="."]
@@ -122,6 +122,7 @@ texture = ExtResource( 2 )
 position = Vector2( 5.48037, -6.7871 )
 scale = Vector2( 1, 0.488157 )
 frames = SubResource( 3 )
+frame = 1
 speed_scale = 5.0
 playing = true
 
@@ -129,6 +130,7 @@ playing = true
 position = Vector2( -6.51963, -6.7871 )
 scale = Vector2( 1, 0.488157 )
 frames = SubResource( 3 )
+frame = 1
 speed_scale = 5.0
 playing = true
 
@@ -136,6 +138,7 @@ playing = true
 position = Vector2( -11.5196, -4.7871 )
 scale = Vector2( 1, 0.488157 )
 frames = SubResource( 3 )
+frame = 1
 speed_scale = 5.0
 playing = true
 
@@ -143,6 +146,7 @@ playing = true
 position = Vector2( 10.6012, -4.79149 )
 scale = Vector2( 1, 0.488157 )
 frames = SubResource( 3 )
+frame = 1
 speed_scale = 5.0
 playing = true
 
