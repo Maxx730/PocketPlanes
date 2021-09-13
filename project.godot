@@ -12,6 +12,7 @@ config_version=4
 
 config/name="SHMUP"
 run/main_scene="res://Scenes/Prototype.tscn"
+run/low_processor_mode=true
 config/icon="res://icon.png"
 
 [display]

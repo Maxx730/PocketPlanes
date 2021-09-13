@@ -8,6 +8,7 @@ export(int) var Hitpoints = 100
 export(float) var DamageTimeout = 0.025
 export(int) var TurnRadius = 1
 export(int) var CirclingSpeed = 200
+export(PackedScene) var FloatingTextScene
 
 onready var OffscreenArrowInst = preload("res://Scenes/OffscreenArrow.tscn")
 onready var ExplosionInst = preload("res://Scenes/Explosion.tscn")
@@ -54,7 +55,12 @@ func Damage(amount):
 			explosion.get_child(2).restart()
 			explosion.get_child(1).restart()
 			explosion.get_child(0).rotation = atan2(-transform.x.y, -transform.x.x) - 90\
-			
+		
+		if FloatingTextScene != null:
+			var FloatingText = FloatingTextScene.instance()
+			FloatingText.position = global_position
+			get_tree().root.add_child(FloatingText)
+		
 		emit_signal("OnDestroyed", self)
 		queue_free()
 	else:

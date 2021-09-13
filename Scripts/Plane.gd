@@ -9,12 +9,16 @@ export(int) var MaxSpeed = 200
 export(int) var MinSpeed = 50
 export(int) var TurnSpeed = 1
 export(int) var Acceleration = 5
+export(int) var Fuel = 100
+export(int) var Efficiency = 3
 
 var Cam = null
 var FinishedSpawn = false
 var SkipIntro = false
 var ShowDebug = false
 var Speed = 100
+var NewSpeed = 100
+var CurrentFuel = Fuel
 		
 func _draw():
 	if ShowDebug:
@@ -23,6 +27,8 @@ func _draw():
 func _process(delta):
 	if ShowDebug:
 		update()
+	
+	Speed = lerp(Speed, NewSpeed, delta * 10)
 	
 	if DetermineEntranceDistance() && !SkipIntro:
 		EnterView(delta)
@@ -34,7 +40,11 @@ func _process(delta):
 			Cam.Target = self
 			
 		var mousePos = get_global_mouse_position()
-		LookAtMouse(mousePos, delta)
+		if DepleteFuel(Efficiency * (Speed / MaxSpeed) * delta):
+			LookAtMouse(mousePos, delta)
+		else:
+			pass
+		
 		FollowMouse(mousePos, delta)
 		PositionShadow()
 		DrawTrail()
@@ -64,7 +74,15 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			if event.button_index == BUTTON_WHEEL_UP:
-				Speed = clamp(Speed + Acceleration, MinSpeed, MaxSpeed)
+				NewSpeed = clamp(Speed + Acceleration, MinSpeed, MaxSpeed)
 			
 			if event.button_index == BUTTON_WHEEL_DOWN:
-				Speed = clamp(Speed - Acceleration, MinSpeed, MaxSpeed)
+				NewSpeed = clamp(Speed - Acceleration, MinSpeed, MaxSpeed)
+
+func DepleteFuel(amount):
+	if CurrentFuel - amount < 0:
+		CurrentFuel = 0
+		return false
+	else:
+		CurrentFuel -= amount
+		return true

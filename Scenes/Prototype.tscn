@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/WorldBuild.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Plane.tscn" type="PackedScene" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://Scripts/Ground.gd" type="Script" id=5]
 [ext_resource path="res://Fonts/ExpressionPro.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Scenes/Spawner.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Sprites/gas_can.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/gas_texture_rect.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/gas_texture_rect_empty.png" type="Texture" id=10]
 
 [sub_resource type="TileSet" id=1]
 4/name = "tiles_packed.png 4"
@@ -80,6 +83,15 @@
 6/z_index = 0
 
 [sub_resource type="DynamicFont" id=2]
+size = 32
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=3]
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_bottom = 3
 font_data = ExtResource( 6 )
 
 [node name="Prototype" type="Node2D"]
@@ -102,6 +114,7 @@ CameraPath = NodePath("../Camera")
 SkipIntro = true
 ShowDebug = true
 SpeedPath = NodePath("../HUD/Margin/VBoxContainer/HBoxContainer/Speed")
+FuelAmount = NodePath("../HUD/Margin/VBoxContainer/HBoxContainer/GasContainer/Container2/TextureRect")
 DebugUIPath = NodePath("../HUD/Margin/VBoxContainer/HBoxContainer/FPSCounter")
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -125,21 +138,63 @@ margin_bottom = 492.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/Margin/VBoxContainer"]
 margin_right = 600.0
-margin_bottom = 14.0
+margin_bottom = 28.0
 
 [node name="FPSCounter" type="Label" parent="HUD/Margin/VBoxContainer/HBoxContainer"]
-margin_right = 298.0
-margin_bottom = 14.0
+margin_top = 7.0
+margin_right = 271.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "0"
 
-[node name="Speed" type="Label" parent="HUD/Margin/VBoxContainer/HBoxContainer"]
-margin_left = 302.0
-margin_right = 600.0
+[node name="GasContainer" type="HBoxContainer" parent="HUD/Margin/VBoxContainer/HBoxContainer"]
+margin_left = 275.0
+margin_right = 291.0
+margin_bottom = 28.0
+custom_constants/separation = 16
+
+[node name="Container" type="Container" parent="HUD/Margin/VBoxContainer/HBoxContainer/GasContainer"]
+margin_top = 14.0
 margin_bottom = 14.0
+size_flags_vertical = 4
+
+[node name="GasCan" type="Sprite" parent="HUD/Margin/VBoxContainer/HBoxContainer/GasContainer/Container"]
+position = Vector2( -104, 0 )
+texture = ExtResource( 8 )
+
+[node name="Container2" type="Container" parent="HUD/Margin/VBoxContainer/HBoxContainer/GasContainer"]
+margin_left = 16.0
+margin_right = 16.0
+margin_bottom = 28.0
+size_flags_vertical = 5
+
+[node name="TextureRect" type="TextureProgress" parent="HUD/Margin/VBoxContainer/HBoxContainer/GasContainer/Container2"]
+margin_left = -104.0
+margin_right = -4.0
+margin_bottom = 16.0
+value = 100.0
+texture_under = ExtResource( 10 )
+texture_progress = ExtResource( 9 )
+
+[node name="Speed" type="Label" parent="HUD/Margin/VBoxContainer/HBoxContainer"]
+margin_left = 295.0
+margin_right = 567.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
+size_flags_vertical = 9
 custom_fonts/font = SubResource( 2 )
-text = "0 MPH"
+text = "100"
+align = 2
+valign = 2
+
+[node name="MPH" type="Label" parent="HUD/Margin/VBoxContainer/HBoxContainer"]
+margin_left = 571.0
+margin_top = 11.0
+margin_right = 600.0
+margin_bottom = 28.0
+size_flags_vertical = 8
+custom_fonts/font = SubResource( 3 )
+text = " MPH"
 align = 2
 
 [node name="Spawner" parent="." instance=ExtResource( 7 )]

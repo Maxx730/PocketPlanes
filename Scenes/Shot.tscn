@@ -19,7 +19,7 @@ contact_monitor = true
 can_sleep = false
 script = ExtResource( 1 )
 FireRate = 0.05
-FireSpeed = 500.0
+FireSpeed = 1000.0
 ImpactScene = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]

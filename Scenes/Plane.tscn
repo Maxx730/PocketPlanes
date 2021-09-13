@@ -9,17 +9,17 @@
 [ext_resource path="res://Scenes/Shot.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Sprites/target_reticle.png" type="Texture" id=8]
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 3, 2 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
 region = Rect2( 3, 0, 3, 2 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ SubResource( 6 ), SubResource( 7 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -32,14 +32,14 @@ extents = Vector2( 11.9131, 15.884 )
 offsets = PoolRealArray( 0, 0.922481 )
 colors = PoolColorArray( 1, 0.590473, 0.00390625, 1, 1, 0.963867, 0, 1 )
 
-[sub_resource type="GradientTexture" id=20]
+[sub_resource type="GradientTexture" id=6]
 gradient = SubResource( 5 )
 
-[sub_resource type="Curve" id=19]
+[sub_resource type="Curve" id=7]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.430682 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=21]
-curve = SubResource( 19 )
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
 
 [sub_resource type="ParticlesMaterial" id=9]
 emission_shape = 1
@@ -50,20 +50,20 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.1
 scale_random = 0.02
-scale_curve = SubResource( 21 )
-color_ramp = SubResource( 20 )
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 6 )
 
 [sub_resource type="Gradient" id=10]
 offsets = PoolRealArray( 0, 0.976744 )
 colors = PoolColorArray( 0, 0, 0, 0.698039, 0, 0, 0, 0.368627 )
 
-[sub_resource type="GradientTexture" id=22]
+[sub_resource type="GradientTexture" id=11]
 gradient = SubResource( 10 )
 
 [sub_resource type="Curve" id=12]
 _data = [ Vector2( 0, 0.493182 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=23]
+[sub_resource type="CurveTexture" id=13]
 curve = SubResource( 12 )
 
 [sub_resource type="ParticlesMaterial" id=14]
@@ -77,17 +77,17 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.1
 scale_random = 0.5
-scale_curve = SubResource( 23 )
-color_ramp = SubResource( 22 )
+scale_curve = SubResource( 13 )
+color_ramp = SubResource( 11 )
 
-[sub_resource type="Gradient" id=16]
+[sub_resource type="Gradient" id=15]
 offsets = PoolRealArray( 0.0155039, 0.302326, 0.666667 )
 colors = PoolColorArray( 0.978516, 0.545816, 0.0152893, 1, 1, 0.972656, 0, 1, 1, 0.995711, 0.843137, 1 )
 
-[sub_resource type="GradientTexture" id=17]
-gradient = SubResource( 16 )
+[sub_resource type="GradientTexture" id=16]
+gradient = SubResource( 15 )
 
-[sub_resource type="ParticlesMaterial" id=15]
+[sub_resource type="ParticlesMaterial" id=17]
 flag_disable_z = true
 spread = 10.0
 gravity = Vector3( 0, 0, 0 )
@@ -97,7 +97,7 @@ orbit_velocity_random = 0.0
 damping = 8.14
 damping_random = 0.5
 scale = 0.05
-color_ramp = SubResource( 17 )
+color_ramp = SubResource( 16 )
 
 [node name="Plane" type="KinematicBody2D" groups=[
 "Plane",
@@ -204,7 +204,7 @@ one_shot = true
 speed_scale = 15.0
 explosiveness = 1.0
 draw_order = 1
-process_material = SubResource( 15 )
+process_material = SubResource( 17 )
 texture = ExtResource( 5 )
 
 [node name="Muzzle2" type="Particles2D" parent="Muzzles"]
@@ -214,7 +214,7 @@ one_shot = true
 speed_scale = 15.0
 explosiveness = 1.0
 draw_order = 1
-process_material = SubResource( 15 )
+process_material = SubResource( 17 )
 texture = ExtResource( 5 )
 
 [node name="Reticle" type="Sprite" parent="."]

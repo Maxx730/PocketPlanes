@@ -10,6 +10,7 @@ export(bool) var ShowDebug = false
 
 #UI Elements
 export(NodePath) var SpeedPath
+export(NodePath) var FuelAmount
 
 #Debug Elements
 export(NodePath) var DebugUIPath
@@ -19,6 +20,7 @@ var Spawned = false
 var Cam = null
 var DebugLabel = null
 var Speedometer = null
+var Fuel = null
 var Spawn = null
 
 func _ready():
@@ -32,6 +34,9 @@ func _ready():
 		
 	if SpeedPath != null:
 		Speedometer = get_node(SpeedPath)
+		
+	if FuelAmount != null:
+		Fuel = get_node(FuelAmount)
 
 func _process(delta):
 	if DebugLabel != null:
@@ -54,4 +59,7 @@ func DetermineStartPoint():
 
 func UpdateUI():
 	if Speedometer != null && Spawn != null:
-		Speedometer.text = String(Spawn.Speed) + "MPH"
+		Speedometer.text = String(floor(Spawn.Speed))
+		
+	if Fuel != null:
+		Fuel.value = 100 * (Spawn.CurrentFuel / Spawn.Fuel)
